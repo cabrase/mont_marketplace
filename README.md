@@ -45,7 +45,7 @@ Django’s built-in user authentication system will serve as the cornerstone of 
 framework for users to log in to their personal profiles to post items for sale.
 - **SQLite**: Used by Django for creating models (ie: User, Listing, etc.) and database management. These models 
 will serve as the foundation for the site, containing the structure of each user profile and listing that is posted. 
-- **HTML, CSS, Javascript, Bootstrap**: Used for front-end development and user interface design within Django. The 
+- **HTML, CSS, Javascript, & Bootstrap**: Used for front-end development and user interface design within Django. The 
 combination of these four tools will contribute to the layout, function, and intuitiveness of the site. Bootstrap will
 be used for forms, buttons, navigation, and other important parts of the user interface.
 
