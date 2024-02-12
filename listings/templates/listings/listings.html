@@ -1,9 +1,32 @@
 {% extends 'listings/base.html' %}
+{% load static %}
 
 {% block content %}
-	<center>
-		<h1> Listings </h1>
-		<br/>
-		As of {{ time }}
-	</center>
+    <center>
+        <h1> Listings </h1>
+        As of {{ time }}
+    </center>
+    <br/>
+    {%  for listing in listing_data %}
+        <div class="card mb-3" style="max-width: 1000px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    {% if listing.photo %}
+                        <img src="{{ listing.photo.url }}" class="img-fluid rounded-start" alt="...">
+                    {% else %}
+                        <img src="{% static 'listings/default_image.jpeg' %}" class="img-fluid rounded-start" alt="Placeholder Image">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ listing.title }}</h5>
+                        <strong>${{ listing.price }}</strong>
+                        <p class="card-text">{{ listing.description }}</p>
+                            <strong>Seller</strong> | {{ listing.seller }} <br/>
+                            <strong>Email</strong> | {{ listing.seller.email }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
