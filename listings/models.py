@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class MontUser(models.Model):
     DORM_CHOICES = [
@@ -37,11 +37,9 @@ class Listing(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=12, decimal_places=2)
-    seller = models.ForeignKey(MontUser, on_delete=models.CASCADE)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     condition = models.CharField(max_length=20, choices=CONDITION_CHOICES)
     photo = models.ImageField(upload_to='listings/', default=DEFAULT_IMAGE_PATH, null=True, blank=True)
-    is_active = models.BooleanField()
-    date_created = models.DateField('Date Posted')
 
     def __str__(self):
         return self.title
