@@ -10,7 +10,7 @@ class ListingForm(ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'For example: Brand, model, '
                                                                                     'color, and size'}),
-            'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tell others about your item'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Tell others about your item'}),
             'photo': forms.FileInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
             'condition': forms.Select(attrs={'class': 'form-control'}),

@@ -1,0 +1,42 @@
+{% extends 'listings/base.html' %}
+{% load static %}
+
+{% block content %}
+	<center>
+    {% if searched %}
+        <h4> Your search: {{ searched }}</h4>
+        <br/>
+        {% for item in items %}
+            <div class="card mb-3" style="max-width: 1000px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    {% if item.photo %}
+                        <img src="{{ item.photo.url }}" class="img-fluid rounded-start" alt="No image">
+                    {% else %}
+                        <img src="{% static 'listings/default_image.jpeg' %}" class="img-fluid rounded-start" alt="Placeholder Image">
+                    {% endif %}
+                </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'show-listing' item.id %}">
+                            {{ item }}</a>
+                    </h5>
+                    <strong>${{ item.price }}</strong>
+                    <p class="card-text">{{ item.description }}</p>
+                        <strong>Seller</strong> | {{ item.seller }} <br/>
+                        <strong>Email</strong> | {{ item.seller.email }}
+                </div>
+            </div>
+            </div>
+            </div>
+            <br/>
+        {% endfor %}
+    {% else %}
+        <h1> Hey! You forgot to search for an item...</h1>
+    {% endif %}
+
+		<br/>
+
+	</center>
+{% endblock %}
