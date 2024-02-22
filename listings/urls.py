@@ -6,8 +6,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.home, name="home"),
     path('listings', views.listings, name="listings"),
-    path('create_listing', views.create_listing, name='create-listing')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('create_listing', views.create_listing, name='create-listing'),
+    path('listings/<listing_id>', views.show_listing, name='show-listing'),
+    path('search_listings', views.search_listings, name='search-listings'),
+    path('update_listing/<listing_id>', views.update_listing, name='update-listing'),
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

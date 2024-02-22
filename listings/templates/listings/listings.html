@@ -7,26 +7,47 @@
         As of {{ time }}
     </center>
     <br/>
-    {%  for listing in listing_data %}
-        <div class="card mb-3" style="max-width: 1000px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    {% if listing.photo %}
-                        <img src="{{ listing.photo.url }}" class="img-fluid rounded-start" alt="...">
-                    {% else %}
-                        <img src="{% static 'listings/default_image.jpeg' %}" class="img-fluid rounded-start" alt="Placeholder Image">
-                    {% endif %}
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ listing.title }}</h5>
-                        <strong>${{ listing.price }}</strong>
-                        <p class="card-text">{{ listing.description }}</p>
-                            <strong>Seller</strong> | {{ listing.seller }} <br/>
-                            <strong>Email</strong> | {{ listing.seller.email }}
-                    </div>
-                </div>
+<style>
+    .card {
+        height: 100%;
+    }
+
+    .card-img-top {
+
+        max-width: 100%;
+        height: 350px;
+        object-fit: cover;
+    }
+    .card-title a {
+        color: black;
+        text-decoration: none;
+    }
+</style>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    {% for listing in listing_data %}
+    <div class="col">
+        <div class="card">
+            <a href="{% url 'show-listing' listing.id %}">
+                {% if listing.photo %}
+                    <img src="{{ listing.photo.url }}" class="card-img-top" alt="No image">
+                {% else %}
+                    <img src="{% static 'listings/default_image.jpeg' %}" class="card-img-top" alt="Placeholder Image">
+                {% endif %}
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{% url 'show-listing' listing.id %}" class="text-decoration-none">
+                        {{ listing.title }}
+                    </a>
+                </h5>
+                <br/>
+                ${{ listing.price }} <br/>
+                <div class="fw-light">Seller | {{ listing.seller.first_name }} {{ listing.seller.last_name }}<br/></div>
+                <div class="fw-light">Email | {{ listing.seller.email }}</div>
             </div>
         </div>
+    </div>
     {% endfor %}
+</div>
 {% endblock %}

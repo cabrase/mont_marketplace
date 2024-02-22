@@ -1,0 +1,49 @@
+{% extends 'listings/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h1 class="text-center">{{ listing.title }}
+                <a href="{% url 'update-listing' listing.id %}" class="btn btn-light">Edit</a></h1>
+                <h4 class="text-center">${{ listing.price }}</h4>
+
+                <div class="text-center mb-4">
+                    {% if listing.photo %}
+                        <img src="{{ listing.photo.url }}" class="img-fluid rounded max-img-size" alt="Listing Image">
+                    {% else %}
+                        <img src="{% static '/listings/default_image.jpeg' %}" class="img-fluid rounded max-img-size" alt="Placeholder Image">
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="mb-4">
+                    <h3>Description</h3>
+                    <p>{{ listing.description }}</p>
+                </div>
+                <hr>
+                <div class="mb-4">
+                    <h3>Condition</h3>
+                    <p>{{ listing.get_condition_display }}</p>
+                </div>
+                <hr>
+                <div>
+                    <h3>Seller Information</h3>
+                    <ul class="list-unstyled">
+                        <li><strong>Name:</strong> {{ listing.seller.first_name }} {{ listing.seller.last_name }}</li>
+                        <li><strong>Email:</strong> {{ listing.seller.email }}</li>
+                        <li><strong>Phone:</strong> {{ listing.seller.phone }}</li>
+                        <li><strong>Dorm:</strong> {{ listing.seller.dorm }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<style>
+    .max-img-size {
+        width: auto;
+        max-height: 300px;
+    }
+</style>

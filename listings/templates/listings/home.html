@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 	<center>
-		<h1> Hello {{ name }}! <br/>
+    {% for f_name in name %}
+		<h1 class="fw-light"> Hello {{ f_name.first_name }}! <br/>
 			Welcome to Mont Marketplace
 		</h1>
 
 		Recent listings:
 		<br/>
 		As of {{ time }}
+    {%  endfor %}
 	</center>
 {% endblock %}
