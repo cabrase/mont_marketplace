@@ -33,7 +33,7 @@ class Listing(models.Model):
         ('bad', 'Bad'),
     ]
 
-    DEFAULT_IMAGE_PATH = '../static/listings/default_image.jpeg'
+    DEFAULT_IMAGE_PATH = 'static/listings/default_image.jpeg'
 
     title = models.CharField(max_length=120)
     description = models.TextField(blank=True)

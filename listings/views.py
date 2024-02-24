@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from .models import Listing, User, MontUser
 from .forms import ListingForm
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
 
 
 def home(request):
@@ -18,12 +19,14 @@ def home(request):
 
 def listings(request):
     listing_data = Listing.objects.all()
-    now = datetime.now()
-    now = now - timedelta(hours=8)
-    time = now.strftime('%I:%M %p PST')
+
+    p = Paginator(Listing.objects.all(), 20)
+    page = request.GET.get('page')
+    posts = p.get_page(page)
+
     return render(request, 'listings/listings.html', {
-        'time': time,
-        'listing_data': listing_data
+        'listing_data': listing_data,
+        'posts': posts
     })
 
 
@@ -68,3 +71,9 @@ def search_listings(request):
     else:
         return render(request, 'listings/search_listings.html',
                       {})
+
+
+def delete_listing(request, listing_id):
+    listing = Listing.objects.get(pk=listing_id)
+    listing.delete()
+    return redirect('listings')
