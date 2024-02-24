@@ -10,7 +10,5 @@ urlpatterns = [
     path('listings/<listing_id>', views.show_listing, name='show-listing'),
     path('search_listings', views.search_listings, name='search-listings'),
     path('update_listing/<listing_id>', views.update_listing, name='update-listing'),
+    path('delete_listing/<listing_id>', views.delete_listing, name='delete-listing'),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,15 +5,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <h1 class="text-center">{{ listing.title }}
-                <a href="{% url 'update-listing' listing.id %}" class="btn btn-light">Edit</a></h1>
+                <h1 class="text-center">{{ listing.title }}</h1>
                 <h4 class="text-center">${{ listing.price }}</h4>
 
                 <div class="text-center mb-4">
                     {% if listing.photo %}
                         <img src="{{ listing.photo.url }}" class="img-fluid rounded max-img-size" alt="Listing Image">
                     {% else %}
-                        <img src="{% static '/listings/default_image.jpeg' %}" class="img-fluid rounded max-img-size" alt="Placeholder Image">
+                        <img src="{% static '/listings/../../static/listings/default_image.jpeg' %}" class="img-fluid rounded max-img-size" alt="Placeholder Image">
                     {% endif %}
                 </div>
                 <hr>
@@ -36,9 +35,13 @@
                         <li><strong>Dorm:</strong> {{ listing.seller.dorm }}</li>
                     </ul>
                 </div>
+            <a href="{% url 'update-listing' listing.id %}" class="btn btn-secondary">Edit</a>
+            <a href="{% url 'delete-listing' listing.id %}" class="btn btn-danger">Delete</a>
             </div>
+        <br/>
         </div>
     </div>
+    <br/>
 {% endblock %}
 
 <style>

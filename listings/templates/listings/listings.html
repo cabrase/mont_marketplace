@@ -2,11 +2,14 @@
 {% load static %}
 
 {% block content %}
-    <center>
-        <h1> Listings </h1>
-        As of {{ time }}
-    </center>
-    <br/>
+    <h1> Listings </h1>
+    <form class="d-flex" method=POST action="{% url 'search-listings' %}">
+      {% csrf_token %}
+
+        <input class="form-control me-2" type="search" placeholder="Search Items" aria-label="Search" name="searched">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </form>
+    <hr><br/>
 <style>
     .card {
         height: 100%;
@@ -15,7 +18,7 @@
     .card-img-top {
 
         max-width: 100%;
-        height: 350px;
+        height: 250px;
         object-fit: cover;
     }
     .card-title a {
@@ -25,7 +28,7 @@
 </style>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-    {% for listing in listing_data %}
+    {% for listing in posts %}
     <div class="col">
         <div class="card">
             <a href="{% url 'show-listing' listing.id %}">
@@ -41,7 +44,6 @@
                         {{ listing.title }}
                     </a>
                 </h5>
-                <br/>
                 ${{ listing.price }} <br/>
                 <div class="fw-light">Seller | {{ listing.seller.first_name }} {{ listing.seller.last_name }}<br/></div>
                 <div class="fw-light">Email | {{ listing.seller.email }}</div>
@@ -50,4 +52,30 @@
     </div>
     {% endfor %}
 </div>
+<br/><hr>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% if posts.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    {% endif %}
+
+    <li class="page-item disabled">
+        <a class="page-link" href="#">{{ posts.number }} of {{ posts.paginator.num_pages }}</a>
+    </li>
+
+    {% if posts.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    {% endif %}
+      </ul>
+</nav>
+<br/><br/>
 {% endblock %}
