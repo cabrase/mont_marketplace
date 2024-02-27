@@ -37,7 +37,7 @@ def listings(request):
         })
     else:
         messages.success(request, "You aren't authorized to view this page.")
-        return redirect('home')
+        return redirect('login')
 
 
 def create_listing(request):
@@ -58,7 +58,7 @@ def create_listing(request):
         return render(request, 'listings/create_listing.html', {'form': form, 'submitted': submitted})
     else:
         messages.success(request, "You aren't authorized to view this page.")
-        return redirect('home')
+        return redirect('login')
 
 
 def my_listings(request):
@@ -76,7 +76,7 @@ def my_listings(request):
 
     else:
         messages.success(request, "You aren't authorized to view this page.")
-        return redirect('home')
+        return redirect('login')
 
 
 def show_listing(request, listing_id):
