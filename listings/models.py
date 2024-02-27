@@ -14,10 +14,10 @@ class MontUser(models.Model):
         ('off campus', 'Off Campus'),
     ]
 
-    first_name = models.CharField(max_length=60)
-    last_name = models.CharField(max_length=60)
-    phone = models.CharField('User Phone', max_length=25)
-    email = models.EmailField('User Email')
+    first_name = models.CharField(max_length=60, default="a")
+    last_name = models.CharField(max_length=60, default="b")
+    phone = models.CharField('User Phone', max_length=25, default=0)
+    email = models.EmailField('User Email', default='b@b.com')
     dorm = models.CharField(max_length=50, choices=DORM_CHOICES)
     
     def __str__(self):

@@ -1,23 +1,59 @@
 {% extends 'listings/base.html' %}
 
 {% block content %}
-
     {% if form.errors %}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            There was an error with your form...
+            <strong>Oops! There was an error with your form:</strong>
+            <ul class="mb-0">
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-
     {% endif %}
-
-    <center>
-        <h1>Register</h1>
-    </center>
-    <br/>
-    <form action="{% url 'register-user' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <br/>
-        <input type="submit" value="Submit" class="btn btn-secondary">
-    </form>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center">Register</h1>
+                <form action="{% url 'register-user' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Username:</label>
+                        {{ form.username }}
+                        <small id="usernameHelp" class="form-text text-muted">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_first_name" class="form-label">First Name:</label>
+                        {{ form.first_name }}
+                        <small id="firstNameHelp" class="form-text text-muted">Enter your first name.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_last_name" class="form-label">Last Name:</label>
+                        {{ form.last_name }}
+                        <small id="lastNameHelp" class="form-text text-muted">Enter your last name.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label">Email:</label>
+                        {{ form.email }}
+                        <small id="emailHelp" class="form-text text-muted">Enter a valid email address.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password1" class="form-label">Password:</label>
+                        {{ form.password1 }}
+                        <small id="passwordHelp" class="form-text text-muted">Enter a password.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password2" class="form-label">Confirm Password:</label>
+                        {{ form.password2 }}
+                        <small id="confirmPasswordHelp" class="form-text text-muted">Confirm your password.</small>
+                    </div>
+                    <button type="submit" class="btn btn-outline-secondary">Submit</button>
+                </form>
+                <br/>
+            </div>
+        </div>
+    </div>
 {% endblock %}
