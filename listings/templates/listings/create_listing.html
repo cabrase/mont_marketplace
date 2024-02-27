@@ -1,19 +1,26 @@
 {% extends 'listings/base.html' %}
 
 {% block content %}
-	<center>
+    {% if user.is_authenticated %}
         <h1>Create Listing</h1>
-    </center>
-    <br/><br/>
-    {% if submitted %}
-        <center>
-            Your listing was successfully created!
-        </center>
+        <br/>
+        {% if submitted %}
+            <center>
+                Your listing was successfully created!
+            </center>
+        {% else %}
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit" class="btn btn-outline-secondary">
+            </form>
+            <br/>
+        {% endif %}
     {% else %}
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit" class="btn btn-secondary">
-        </form>
+        <center>
+            <h3 class="fw-light">Sorry! You must be logged in to view this page.</h3><br/>
+            <a href="{% url 'login' %}" class="btn btn-outline-dark btn-lg">Login</a>&nbsp&nbsp
+            <a href="{% url 'register-user' %}" class="btn btn-outline-dark btn-lg">Register</a><br/>
+        </center>
     {% endif %}
 {% endblock %}

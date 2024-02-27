@@ -8,11 +8,8 @@ urlpatterns = [
     path('', include('listings.urls')),
     path('members/', include('django.contrib.auth.urls')),
     path('members/', include('members.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = "Mont Marketplace Administration"
 admin.site.site_title = "Browser Admin"
 admin.site.index_title = "Mont Marketplace Admin"
-
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

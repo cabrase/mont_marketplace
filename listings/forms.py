@@ -6,7 +6,7 @@ from .models import Listing
 class ListingForm(ModelForm):
     class Meta:
         model = Listing
-        fields = ('title', 'description', 'photo', 'price', 'condition', 'seller')
+        fields = ('title', 'description', 'photo', 'price', 'condition', 'category')
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'For example: Brand, model, '
                                                                                     'color, and size'}),
@@ -14,5 +14,5 @@ class ListingForm(ModelForm):
             'photo': forms.FileInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
             'condition': forms.Select(attrs={'class': 'form-control'}),
-            'seller': forms.Select(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'})
         }

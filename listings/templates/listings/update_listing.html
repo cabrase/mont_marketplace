@@ -1,13 +1,19 @@
 {% extends 'listings/base.html' %}
 
 {% block content %}
-
-    <h1> Edit Listing </h1>
-    <br/>
-    <form action="" method=POST>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update" class="btn-btn-light">
-    </form>
-    <br/>
+    {% if user.is_authenticated %}
+        {% if user.id == listing.seller %}
+            <h1> Edit Listing </h1>
+            <br/>
+            <form action="" method=POST>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Update" class="btn btn-outline-secondary">
+            </form>
+            <br/>
+        {% else %}
+            <h3>Access Denied</h3>
+            <p>Only the post's creator can edit this post.</p>
+        {% endif %}
+    {% endif %}
 {% endblock %}
