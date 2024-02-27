@@ -3,17 +3,16 @@
 
 {% block content %}
     <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-</head>
-	<center>
-    {% for f_name in name %}
-		<h1 class="fw-light"> Hello {{ f_name.first_name }}! <br/>
-			Welcome to Mont Marketplace
-		</h1>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home Page</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <center>
+
+        <h1 class="fw-light" style="font-size: 46px;">
+            Welcome to Mont Marketplace
+        </h1>
         <br/>
-    {%  endfor %}
-	</center>
+    </center>
 {% endblock %}

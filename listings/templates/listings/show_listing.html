@@ -3,42 +3,48 @@
 
 {% block content %}
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <h1 class="text-center">{{ listing.title }}</h1>
-                <h4 class="text-center">${{ listing.price }}</h4>
+    <div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h1 class="text-center">{{ listing.title }}</h1>
+        <h4 class="text-center">${{ listing.price }}</h4>
 
-                <div class="text-center mb-4">
-                    {% if listing.photo %}
-                        <img src="{{ listing.photo.url }}" class="img-fluid rounded max-img-size" alt="Listing Image">
-                    {% else %}
-                        <img src="{% static '/listings/../../static/listings/default_image.jpeg' %}" class="img-fluid rounded max-img-size" alt="Placeholder Image">
-                    {% endif %}
+        <div class="text-center mb-4">
+            {% if listing.photo %}
+                <img src="{{ listing.photo.url }}" class="img-fluid rounded max-img-size" alt="Listing Image">
+            {% else %}
+                <img src="{% static '/listings/../../static/listings/default_image.jpeg' %}"
+                     class="img-fluid rounded max-img-size" alt="Placeholder Image">
+            {% endif %}
+        </div>
+        <div class="container">
+            <div class="row" align="left">
+                <div class="col">
+                    <strong>Condition: </strong>{{ listing.get_condition_display }}
                 </div>
-                <hr>
-                <div class="mb-4">
-                    <h3>Description</h3>
-                    <p>{{ listing.description }}</p>
+                <div class="col">
+                    <strong>Category: </strong>{{ listing.get_category_display }}
                 </div>
-                <hr>
-                <div class="mb-4">
-                    <h3>Condition</h3>
-                    <p>{{ listing.get_condition_display }}</p>
-                </div>
-                <hr>
-                <div>
-                    <h3>Seller Information</h3>
-                    <ul class="list-unstyled">
-                        <li><strong>Name:</strong> {{ listing.seller.first_name }} {{ listing.seller.last_name }}</li>
-                        <li><strong>Email:</strong> {{ listing.seller.email }}</li>
-                        <li><strong>Phone:</strong> {{ listing.seller.phone }}</li>
-                        <li><strong>Dorm:</strong> {{ listing.seller.dorm }}</li>
-                    </ul>
-                </div>
-            <a href="{% url 'update-listing' listing.id %}" class="btn btn-secondary">Edit</a>
-            <a href="{% url 'delete-listing' listing.id %}" class="btn btn-danger">Delete</a>
             </div>
-        <br/>
+        </div>
+        <hr>
+        <div class="mb-4">
+            <h5>Description</h5>
+            <p>{{ listing.description }}</p>
+        </div>
+        <hr>
+        <div>
+            <h5>Seller Information</h5>
+            <ul class="list-unstyled">
+                <li>{{ listing_seller.first_name }} {{ listing_seller.last_name }}</li>
+                <li>{{ listing_seller.email }}</li>
+
+            </ul>
+            {% if user.id == listing.seller %}
+                <a href="{% url 'update-listing' listing.id %}" class="btn btn-outline-secondary">Edit</a>
+                <a href="{% url 'delete-listing' listing.id %}" class="btn btn-outline-danger">Delete</a>
+                <br/>
+            {% endif %}
+            <br/>
         </div>
     </div>
     <br/>
