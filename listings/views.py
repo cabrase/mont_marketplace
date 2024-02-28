@@ -23,7 +23,7 @@ def listings(request):
     if request.user.is_authenticated:
         listing_data = Listing.objects.all()
 
-        p = Paginator(Listing.objects.all(), 20)
+        p = Paginator(Listing.objects.all().order_by('-created_at', '-updated_at'), 20)
         page = request.GET.get('page')
         posts = p.get_page(page)
 
@@ -64,7 +64,11 @@ def create_listing(request):
 def my_listings(request):
     if request.user.is_authenticated:
         me = request.user.id
-        my_posts = Listing.objects.filter(seller=me)
+        #my_posts = Listing.objects.filter(seller=me).order_by('-created_at', '-updated_at')
+
+        p = Paginator(Listing.objects.filter(seller=me).order_by('-created_at', '-updated_at'), 20)
+        page = request.GET.get('page')
+        my_posts = p.get_page(page)
 
         searched = request.POST.get('searched')
         if searched:
