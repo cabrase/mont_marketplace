@@ -5,14 +5,36 @@
     {% if user.is_authenticated %}
         <div class="container">
             <h1> Listings </h1>
-            <form class="d-flex" method="POST" action="{% url 'search-listings' %}">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input class="form-control me-2" type="search" placeholder="Search Items" aria-label="Search"
-                           name="searched">
-                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+            <div class="row">
+                <div class="col-md-6">
+                    <form class="d-flex" method="POST" action="{% url 'search-listings' %}">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input class="form-control me-2" type="search" placeholder="Search Items" aria-label="Search"
+                                   name="searched">
+                            <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <div class="col-md-6">
+                    <form class="d-flex" method="GET" action="{% url 'filter-listings' %}">
+                        {% csrf_token %}
+                        <select class="form-select me-2" aria-label="Category" name="category">
+                            <option selected>All Categories</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="dorm_related">Dorm Related</option>
+                            <option value="clothing_accessories">Clothing and Accessories</option>
+                            <option value="sports_outdoors">Sports and Outdoors</option>
+                            <option value="westmont_textbooks">Westmont Textbooks</option>
+                            <option value="other_books">Other Books</option>
+                            <option value="music">Music</option>
+                            <option value="automotive">Automotive</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <button class="btn btn-outline-secondary" type="submit">Filter</button>
+                    </form>
+                </div>
+            </div>
         </div>
         <hr><br/>
         <style>

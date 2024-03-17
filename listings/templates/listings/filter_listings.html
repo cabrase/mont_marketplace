@@ -19,10 +19,20 @@
         }
     </style>
     <h1> Listings </h1>
-    <form class="d-flex" method="POST" action="{% url 'filter-listings' %}">
+    <form class="d-flex" method="GET" action="{% url 'filter-listings' %}">
         {% csrf_token %}
-        <input class="form-control me-2" type="search" placeholder="Filter Listings" aria-label="Filter"
-               name="filtered">
+        <select class="form-select me-2" aria-label="Category" name="category">
+            <option selected>All Categories</option>
+            <option value="electronics">Electronics</option>
+            <option value="dorm_related">Dorm Related</option>
+            <option value="clothing_accessories">Clothing and Accessories</option>
+            <option value="sports_outdoors">Sports and Outdoors</option>
+            <option value="westmont_textbooks">Westmont Textbooks</option>
+            <option value="other_books">Other Books</option>
+            <option value="music">Music</option>
+            <option value="automotive">Automotive</option>
+            <option value="other">Other</option>
+        </select>
         <button class="btn btn-outline-secondary" type="submit">Filter</button>
     </form>
     <hr>
