@@ -1,9 +1,7 @@
 from django.contrib import admin
-from .models import Listing
+from .models import Listing, MontUser
 
-# admin.site.register(Listing)
-# admin.site.register(MontUser)
-
+admin.site.register(MontUser)
 
 @admin.register(Listing)
 class ListingAdmin(admin.ModelAdmin):

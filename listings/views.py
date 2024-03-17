@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from datetime import datetime, timedelta
-from .models import Listing, User, MontUser
+from .models import Listing
 from django.contrib.auth.models import User
 from .forms import ListingForm
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
-from django.contrib import messages
 from django.urls import reverse
+
+from django.contrib import messages
 
 
 def home(request):
@@ -21,7 +22,7 @@ def home(request):
 
 
 def listings(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.montuser.email_is_verified is True:
         listing_data = Listing.objects.all()
 
         p = Paginator(Listing.objects.all().order_by('-created_at', '-updated_at'), 20)
@@ -43,7 +44,7 @@ def listings(request):
 
 
 def create_listing(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.montuser.email_is_verified is True:
         submitted = False
         if request.method == "POST":
             form = ListingForm(request.POST, request.FILES)
@@ -64,7 +65,7 @@ def create_listing(request):
 
 
 def my_listings(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.montuser.email_is_verified is True:
         me = request.user.id
 
         p = Paginator(Listing.objects.filter(seller=me).order_by('-created_at', '-updated_at'), 20)

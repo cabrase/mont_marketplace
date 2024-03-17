@@ -7,6 +7,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
 class RegisterUserForm(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
     first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -24,6 +25,9 @@ class RegisterUserForm(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
+        # email_check = User.objects.filter(email=email)
+        # if email_check.exists():
+        #     raise forms.ValidationError('This Email already exists')
         if email and not email.endswith('@westmont.edu'):
             raise forms.ValidationError("Only Westmont College email addresses are allowed.")
         return email

@@ -1,29 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 
 
 class MontUser(models.Model):
-    DORM_CHOICES = [
-        ('page', 'Page'),
-        ('emerson', 'Emerson'),
-        ('clark', 'Clark'),
-        ('vk', 'VK'),
-        ('armington', 'Armington'),
-        ('glc', 'GLC'),
-        ('off campus', 'Off Campus'),
-    ]
-
-    first_name = models.CharField(max_length=60, default="a")
-    last_name = models.CharField(max_length=60, default="b")
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    email_is_verified = models.BooleanField(default=False)
     phone = models.CharField('User Phone', max_length=25, default=0)
-    email = models.EmailField('User Email', default='b@b.com')
-    dorm = models.CharField(max_length=50, choices=DORM_CHOICES)
     
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        return str(self.user)
 
+
+@receiver(post_save, sender=User)
+def create_mont_user(sender, instance, created, **kwargs):
+    if created:
+        MontUser.objects.create(user=instance)
 
 class Listing(models.Model):
     CONDITION_CHOICES = [
