@@ -6,6 +6,7 @@ from .forms import ListingForm
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.urls import reverse
 
 
 def home(request):
@@ -28,12 +29,13 @@ def listings(request):
         posts = p.get_page(page)
 
         category = request.GET.get('category')
-        user_listings = listing_data.filter(category=category)
+
+        if category:
+            listing_data = listing_data.filter(category=category)
 
         return render(request, 'listings/listings.html', {
             'listing_data': listing_data,
             'posts': posts,
-            'user_listings': user_listings
         })
     else:
         messages.success(request, "You aren't authorized to view this page.")
@@ -64,7 +66,6 @@ def create_listing(request):
 def my_listings(request):
     if request.user.is_authenticated:
         me = request.user.id
-        #my_posts = Listing.objects.filter(seller=me).order_by('-created_at', '-updated_at')
 
         p = Paginator(Listing.objects.filter(seller=me).order_by('-created_at', '-updated_at'), 20)
         page = request.GET.get('page')
@@ -97,33 +98,37 @@ def update_listing(request, listing_id):
     if form.is_valid():
         form.save()
         return redirect('show-listing', listing.id)
-    return render(request, 'listings/update_listing.html',
-                  {'listing': listing,
-                   'form': form})
+    return render(request, 'listings/update_listing.html',{
+        'listing': listing,
+        'form': form
+    })
 
 
 def search_listings(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        items = Listing.objects.filter(title__contains=searched)
-        return render(request, 'listings/search_listings.html',
-                      {'searched': searched,
-                       'items': items})
-    else:
-        return render(request, 'listings/search_listings.html',
-                      {})
+        if searched:
+            items = Listing.objects.filter(title__contains=searched)
+            return render(request, 'listings/search_listings.html',
+                          {'searched': searched,
+                           'items': items
+                           })
+        else:
+            return HttpResponseRedirect(reverse('listings'))
 
 
 def filter_listings(request):
-    if request.method == "POST":
-        filtered = request.POST['filtered']
-        items = Listing.objects.filter(category=filtered)
-        return render(request, 'listings/filter_listings.html',
-                      {'filtered': filtered,
-                       'items': items})
+    category = request.GET.get('category')
+
+    if category and category != 'All Categories':
+        items = Listing.objects.filter(category=category)
+
+        return render(request, 'listings/filter_listings.html', {
+            'category': category,
+            'items': items,
+        })
     else:
-        return render(request, 'listings/search_listings.html',
-                      {})
+        return HttpResponseRedirect(reverse('listings'))
 
 
 def delete_listing(request, listing_id):
