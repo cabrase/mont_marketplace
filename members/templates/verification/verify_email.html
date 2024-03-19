@@ -1,9 +1,11 @@
 {% extends 'listings/base.html' %}
 
 {% block content %}
-<h1>You need to verify your email</h1>
-<form method="post">
-    {% csrf_token %}
-    <input class="btn btn-dark max-btn" type="submit" value="Verify">
-</form>
+    <center>
+        <h2>You need to verify your email</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input class="btn btn-outline-dark max-btn" type="submit" value="Verify">
+        </form>
+    </center>
 {% endblock %}

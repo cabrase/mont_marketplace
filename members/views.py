@@ -92,7 +92,7 @@ def verify_email_confirm(request, uidb64, token):
         user.montuser.email_is_verified = True
         user.montuser.save()
         messages.success(request, 'Your email has been verified.')
-        return redirect('verify-email-complete')
+        return redirect('home')
     else:
         messages.warning(request, 'The link is invalid.')
     return render(request, 'verification/verify_email_confirm.html')

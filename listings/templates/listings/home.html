@@ -8,11 +8,52 @@
         <title>Home Page</title>
         <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
-    <center>
-
-        <h1 class="fw-light" style="font-size: 46px;">
-            Welcome to Mont Marketplace
-        </h1>
-        <br/>
-    </center>
+    <div class="container">
+        <div class="card mb-4" style="background-color: rgba(255, 255, 255, 0.9);">
+            <div class="card-body">
+                <center>
+                    <h3 class="card-title">Welcome to Mont Marketplace!</h3>
+                </center>
+                <p class="card-text">
+                    Mont Marketplace is a web-based application made exclusively for the Westmont community. It enables
+                    students, faculty, and staff to easily buy and sell a broad range of used items and services within
+                    the safety and convenience of Westmont’s campus. With an intuitive and appealing interface, users
+                    are able to create an account, post listings for items or services they wish to sell, and view
+                    countless items for sale from others on the site. From furniture to surfboards to textbooks, Mont
+                    Marketplace caters to a variety of needs and fosters a culture of sustainability through reuse and
+                    exchange on campus.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
+                <div class="card mb-4" style="background-color: rgba(255, 255, 255, 0.9);">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Sell an Item</h5>
+                        <p class="card-text">Click below to create a new listing for an item you want to sell.</p>
+                        <a href="{% url 'create-listing' %}" class="btn btn-outline-dark">Create Listing</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
+                <div class="card mb-4" style="background-color: rgba(255, 255, 255, 0.9);">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">View Items for Sale</h5>
+                        <p class="card-text">Browse through all available listings to find items you're interested
+                            in.</p>
+                        <a href="{% url 'listings' %}" class="btn btn-outline-dark">View Listings</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
+                <div class="card mb-4" style="background-color: rgba(255, 255, 255, 0.9);">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">My Listings</h5>
+                        <p class="card-text">View and manage the listings you've created.</p>
+                        <a href="{% url 'my-listings' %}" class="btn btn-outline-dark">My Listings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
