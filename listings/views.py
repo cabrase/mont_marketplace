@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from datetime import datetime, timedelta
-from .models import Listing
+from .models import Listing, MontUser
 from django.contrib.auth.models import User
 from .forms import ListingForm
 from django.http import HttpResponseRedirect

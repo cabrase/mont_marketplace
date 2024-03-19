@@ -1,7 +1,12 @@
 {% extends 'listings/base.html' %}
 
 {% block content %}
-<div class="alert alert-success">
-    You have successfully verified your e-mail
-</div>
+    <div class="alert alert-success">
+        You have successfully verified your e-mail
+    </div>
+    <center>
+        <h3 class="fw-light">Welcome to Mont Marketplace!</h3><br/>
+        <a href="{% url 'create-listing' %}" class="btn btn-outline-dark btn-lg">Create Listing</a>&nbsp&nbsp
+        <a href="{% url 'listings' %}" class="btn btn-outline-dark btn-lg">Listings</a><br/>
+    </center>
 {% endblock %}

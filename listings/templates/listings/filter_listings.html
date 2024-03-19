@@ -18,7 +18,8 @@
             text-decoration: none;
         }
     </style>
-    <h1> Listings </h1>
+    <h1> Listings &nbsp
+    <a href="{% url 'listings' %}" class="btn btn-outline-dark btn-sm back-button">Back</a></h1>
     <form class="d-flex" method="GET" action="{% url 'filter-listings' %}">
         {% csrf_token %}
         <select class="form-select me-2" aria-label="Category" name="category">
@@ -33,7 +34,7 @@
             <option value="automotive">Automotive</option>
             <option value="other">Other</option>
         </select>
-        <button class="btn btn-outline-secondary" type="submit">Filter</button>
+        <button class="btn btn-outline-dark" type="submit">Filter</button>
     </form>
     <hr>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
