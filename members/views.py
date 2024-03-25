@@ -43,7 +43,6 @@ def register_user(request):
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request, user)
-            # messages.success(request, "You now must verify your email")
             return redirect('verify-email')
     else:
         form = RegisterUserForm()

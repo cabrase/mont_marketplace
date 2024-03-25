@@ -41,6 +41,11 @@
                         <small id="emailHelp" class="form-text text-muted">Enter a valid email address.</small>
                     </div>
                     <div class="mb-3">
+                        <label for="id_phone" class="form-label">Phone Number:</label>
+                        {{ form.phone }}
+                        <small id="emailHelp" class="form-text text-muted">Enter a valid phone number (###-###-####)</small>
+                    </div>
+                    <div class="mb-3">
                         <label for="id_password1" class="form-label">Password:</label>
                         {{ form.password1 }}
                         <small id="passwordHelp" class="form-text text-muted">Enter a password.</small>
@@ -50,7 +55,7 @@
                         {{ form.password2 }}
                         <small id="confirmPasswordHelp" class="form-text text-muted">Confirm your password.</small>
                     </div>
-                    <button type="submit" class="btn btn-outline-secondary">Submit</button>
+                    <button type="submit" class="btn btn-outline-dark">Submit</button>
                 </form>
                 <br/>
             </div>
