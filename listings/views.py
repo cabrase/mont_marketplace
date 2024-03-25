@@ -135,5 +135,5 @@ def filter_listings(request):
 def delete_listing(request, listing_id):
     listing = Listing.objects.get(pk=listing_id)
     listing.delete()
-    messages.success(request, "Event Deleted")
+    messages.success(request, "Post Deleted")
     return redirect('listings')
