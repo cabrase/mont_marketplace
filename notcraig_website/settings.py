@@ -80,14 +80,9 @@ WSGI_APPLICATION = 'notcraig_website.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mont_marketplace',
-        'USER': 'cbrase',
-        'PASSWORD': 'Lovejesus5!',
-        'HOST': 'localhost',
-        'PORT': '5432',  # default PostgreSQL port (5432)
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL')
+    )
 }
 
 # Password validation
