@@ -14,7 +14,7 @@
     <div class="container">
         <div class="card mb-4" style="background-color: rgba(255, 255, 255);">
             <div class="card-body">
-                <h5 class="card-title">About</h5>
+                <h5 class="card-title text-center">About</h5>
                 <p class="card-text">
                     Mont Marketplace is made exclusively for the Westmont community. It enables students, faculty, and
                     staff to easily buy and sell a broad range of used items and services within the safety and
@@ -25,7 +25,7 @@
 
         <div class="card mb-4" style="background-color: rgba(255, 255, 255);">
             <div class="card-body">
-                <h5 class="card-title">Posting Guidelines</h5>
+                <h5 class="card-title text-center">Posting Guidelines</h5>
                 <p class="card-text">
                     Mont Marketplace strictly prohibits the posting of inappropriate content,
                     including but not limited to weapons and other harmful items or images. Any violation of
@@ -35,18 +35,15 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-4 d-flex align-items-center justify-content-center">
-                <div class="card mb-4" style="background-color: rgba(255, 255, 255);">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Westmont Verification</h5>
-                        <p class="card-text">Each user is required to verify their Westmont email so only those
-                            affiliated with Westmont can access the site. If you are having trouble verifying your
-                            Westmont email, contact montmarketplace@gmail.com.</p>
-                    </div>
-                </div>
+        <div class="card mb-4" style="background-color: rgba(255, 255, 255);">
+            <div class="card-body">
+                <h5 class="card-title text-center">Westmont Verification</h5>
+                <p class="card-text">
+                    Each user is required to verify their Westmont email so only those
+                    affiliated with Westmont can access the site. If you are having trouble verifying your
+                    Westmont email, contact montmarketplace@gmail.com.
+                </p>
             </div>
-
         </div>
 
         <div class="row">
@@ -55,7 +52,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Sell an Item</h5>
                         <p class="card-text">Click below to create a new listing for an item you want to sell.</p>
-                        <a href="{% url 'create-listing' %}" class="btn btn-outline-dark">Create Listing</a>
+                        <a href="{% url 'create-listing' %}" class="btn btn-dark">Create Listing</a>
                     </div>
                 </div>
             </div>
@@ -65,7 +62,7 @@
                         <h5 class="card-title">View Items for Sale</h5>
                         <p class="card-text">Browse through all available listings to find items you're interested
                             in.</p>
-                        <a href="{% url 'listings' %}" class="btn btn-outline-dark">View Listings</a>
+                        <a href="{% url 'listings' %}" class="btn btn-dark">View Listings</a>
                     </div>
                 </div>
             </div>
@@ -74,7 +71,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">My Listings</h5>
                         <p class="card-text">View and manage the listings you've created.</p>
-                        <a href="{% url 'my-listings' %}" class="btn btn-outline-dark">My Listings</a>
+                        <a href="{% url 'my-listings' %}" class="btn btn-dark">My Listings</a>
                     </div>
                 </div>
             </div>
