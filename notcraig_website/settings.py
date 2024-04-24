@@ -18,7 +18,7 @@ SECRET_KEY = 'django-insecure-6o24xtw@tie7#770)jv6wxklpk*cxr+!ys69a!wch8q(i*17m$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['44.237.58.184']
+ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'listings',
     'members',
 ]
@@ -136,17 +137,27 @@ STATICFILES_DIRS = (
 os.path.join(BASE_DIR, 'static'),
 )
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 django_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']
 
 AWS_ACCESS_KEY_ID = 'AKIA3VQS4PB42GLCRPXQ'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'montmarketplacebucket'
-AWS_S3_REGION_NAME = 'us-west-1'
-
-# Use Amazon S3 for static and media files storage
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_REGION_NAME = 'us-west-1'
+AWS_DEFAULT_ACL = 'public-read'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400'
+}
+AWS_LOCATION = 'static'
+AWS_QUERYSTRING_AUTH = False
+AWS_HEADERS = {
+    'Access-Control-Allow_Origin': '*'
+}
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
