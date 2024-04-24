@@ -41,7 +41,7 @@
 
                     </ul>
                     {% if user.id == listing.seller %}
-                        <a href="{% url 'update-listing' listing.id %}" class="btn btn-outline-secondary">Edit</a>
+                        <a href="{% url 'update-listing' listing.id %}" class="btn btn-outline-dark">Edit</a>
                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
                             Delete
