@@ -1,14 +1,9 @@
 body {
     background-image: url('home/home_image_main.jpeg');
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
+    background-position: top center;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 50vh;
     margin: 0;
     padding: 0;
-}
-.container {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
 }
