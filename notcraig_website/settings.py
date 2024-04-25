@@ -143,6 +143,9 @@ django_heroku.settings(locals(), staticfiles=False)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-cloud_name = 'hjbexzxtm'
-api_key = '644894565397855'
-api_secret = 'J-GHGxMeMms_rRR0i1tKxWQP0XA'
+cloudinary.config(
+    cloud_name='hjbexzxtm',
+    api_key='644894565397855',
+    api_secret='J-GHGxMeMms_rRR0i1tKxWQP0XA',
+    secure=True
+)

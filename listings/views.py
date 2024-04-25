@@ -6,8 +6,8 @@ from .forms import ListingForm
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.urls import reverse
-
 from django.contrib import messages
+from cloudinary.uploader import upload
 
 
 def home(request):
@@ -44,13 +44,18 @@ def listings(request):
 
 
 def create_listing(request):
-    if request.user.is_authenticated and request.user.montuser.email_is_verified is True:
+    if request.user.is_authenticated and request.user.montuser.email_is_verified:
         submitted = False
         if request.method == "POST":
             form = ListingForm(request.POST, request.FILES)
             if form.is_valid():
                 listing = form.save(commit=False)
                 listing.seller = request.user.id
+                # Upload image to Cloudinary
+                if 'photo' in request.FILES:
+                    uploaded_file = request.FILES['photo']
+                    result = upload(uploaded_file)
+                    listing.photo = result['secure_url']
                 listing.save()
                 return HttpResponseRedirect('/create_listing?submitted=True')
         else:
@@ -109,7 +114,7 @@ def search_listings(request):
     if request.method == "POST":
         searched = request.POST['searched']
         if searched:
-            items = Listing.objects.filter(title__contains=searched)
+            items = Listing.objects.filter(title__icontains=searched)
             return render(request, 'listings/search_listings.html',
                           {'searched': searched,
                            'items': items

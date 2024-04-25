@@ -43,7 +43,7 @@
                 <div class="card">
                     <a href="{% url 'show-listing' item.id %}">
                         {% if item.photo %}
-                            <img src="{{ item.photo.url }}" class="card-img-top" alt="No image">
+                            <img src="{{ item.photo }}" class="card-img-top" alt="No image">
                         {% else %}
                             <img src="{% static 'listings/default_image.jpeg' %}"
                                  class="card-img-top" alt="Placeholder Image">
