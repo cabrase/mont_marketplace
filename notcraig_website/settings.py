@@ -77,16 +77,7 @@ WSGI_APPLICATION = 'notcraig_website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd46n3m75103ti1',
-        'USER': 'vjtrzkgexeyhel',
-        'PASSWORD': 'd93dddcab3f3ba0ec9193d68b1c36eb0904391e59b6bbaf43ac328cb0a91c8a5',
-        'HOST': 'ec2-34-202-53-101.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+DATABASES = {'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -121,43 +112,36 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'listings/static/')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'listings/static/')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = (
-os.path.join(BASE_DIR, 'static'),
-)
+# STATICFILES_DIRS = (
+# os.path.join(BASE_DIR, 'static'),
+# )
 
 django_heroku.settings(locals())
-del DATABASES['default']['OPTIONS']['sslmode']
 
 AWS_ACCESS_KEY_ID = 'AKIA3VQS4PB42GLCRPXQ'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'montmarketplacebucket'
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_URL = 'https://montmarketplacebucket.s3.amazonaws.com/'
 AWS_S3_REGION_NAME = 'us-west-1'
-AWS_DEFAULT_ACL = 'public-read'
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400'
-}
-AWS_LOCATION = 'static'
-AWS_QUERYSTRING_AUTH = False
-AWS_HEADERS = {
-    'Access-Control-Allow_Origin': '*'
-}
+AWS_DEFAULT_ACL = 'None'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
-# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+STATIC_URL = AWS_URL + '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+MEDIA_URL = AWS_URL + '/media/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
