@@ -5,6 +5,9 @@ from django.contrib import staticfiles
 import django_heroku
 import dj_database_url
 from decouple import config
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -106,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
 },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -131,7 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_ROOT = os.path.join(BASE_DIR, 'listings/static/')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
 os.path.join(BASE_DIR, 'static'),
@@ -139,27 +141,8 @@ os.path.join(BASE_DIR, 'static'),
 
 django_heroku.settings(locals(), staticfiles=False)
 
-AWS_ACCESS_KEY_ID = 'AKIA3VQS4PB42GLCRPXQ'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'montmarketplacebucket1'
-AWS_URL = 'https://montmarketplacebucket1.s3.amazonaws.com/'
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_S3_REGION_NAME = 'us-west-1'
-AWS_DEFAULT_ACL = 'None'
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400'
-}
-AWS_S3_SIGNATURE_VERSION = 's3v4'
-AWS_LOCATION = 'static'
-AWS_QUERYSTRING_AUTH = False
-AWS_HEADERS = {
-    'Access-Control-Allow_Origin': '*'
-}
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-# STATIC_URL = AWS_URL + '/static/'
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-MEDIA_URL = AWS_URL + '/media/'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
+cloud_name = 'hjbexzxtm'
+api_key = '644894565397855'
+api_secret = 'J-GHGxMeMms_rRR0i1tKxWQP0XA'
