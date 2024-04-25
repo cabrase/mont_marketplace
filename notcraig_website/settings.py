@@ -139,10 +139,10 @@ os.path.join(BASE_DIR, 'static'),
 
 django_heroku.settings(locals(), staticfiles=False)
 
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_URL = config('AWS_URL')
+AWS_ACCESS_KEY_ID = 'AKIA3VQS4PB42GLCRPXQ'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'montmarketplacebucket1'
+AWS_URL = 'https://montmarketplacebucket1.s3.amazonaws.com/'
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_REGION_NAME = 'us-west-1'
 AWS_DEFAULT_ACL = 'None'

@@ -21,11 +21,6 @@ def create_mont_user(sender, instance, created, **kwargs):
         MontUser.objects.create(user=instance)
 
 
-class MediaStorage(S3Boto3Storage):
-    location = 'media/listings'
-    file_overwrite = False
-
-
 class Listing(models.Model):
     CONDITION_CHOICES = [
         ('new', 'New'),
@@ -53,7 +48,7 @@ class Listing(models.Model):
     price = models.DecimalField(max_digits=12, decimal_places=2)
     seller = models.IntegerField(blank=False, default=1)
     condition = models.CharField(max_length=20, choices=CONDITION_CHOICES)
-    photo = models.ImageField(upload_to='listings/', null=True, blank=True, storage=MediaStorage())
+    photo = models.ImageField(upload_to='listings/', null=True, blank=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, blank=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
